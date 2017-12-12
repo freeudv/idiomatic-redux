@@ -1,14 +1,11 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 
-import AddTodo from './AddTodo.jsx'
-import VisibleTodoList from './VisibleTodoList.jsx'
-import Footer from './Footer.jsx'
+import Home from './Home.jsx'
 
 const App = () => (
   <div>
-    <AddTodo />
-    <VisibleTodoList />
-    <Footer />
+    <Route exact path="/:filter?" component={Home} />
   </div>
 )
 

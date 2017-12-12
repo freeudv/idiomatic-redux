@@ -1,25 +1,12 @@
+import uuidv4 from 'uuid/v4'
+
 export const ADD_TODO = 'ADD_TODO'
 export const TOGGLE_TODO = 'TOGGLE_TODO'
-export const SET_FILTER = 'SET_FILTER'
 
-export const addTodo = title => {
-  return {
-    type: ADD_TODO,
-    title
-  }
-}
+export const addTodo = title => ({
+  type: ADD_TODO,
+  id: uuidv4(),
+  title
+})
 
-export const toggleTodo = id => {
-  return {
-    type: TOGGLE_TODO,
-    id
-  }
-}
-
-export const setFilter = filter => {
-  return {
-    type: SET_FILTER,
-    filter
-  }
-}
-
+export const toggleTodo = id => ({ type: TOGGLE_TODO, id })

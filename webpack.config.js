@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -48,7 +48,8 @@ module.exports = {
   devtool: 'cheap-eval-source-map', //delete in production
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json', '*']
+    extensions: ['.js', '.jsx', '.json', '*'],
+    modules: [path.resolve(__dirname, 'src'), 'node_modules']
   },
 
   devServer: {
@@ -59,4 +60,4 @@ module.exports = {
     hot: true,
     host: '0.0.0.0'
   }
-};
+}

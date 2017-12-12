@@ -1,13 +1,14 @@
-import { connect } from 'react-redux'
-import { setFilter } from '../actions'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-import Link from './Link.jsx'
+const FilterLink = ({ filter, children }) => (
+  <NavLink
+    exact
+    to={filter === 'all' ? '/' : `/${filter}`}
+    activeStyle={{ textDecoration: 'none', color: 'black' }}
+  >
+    {children}
+  </NavLink>
+)
 
-const mapStateToProps = (state, props) => ({ active: props.filter === state.filter })
-
-const mapDispatchToProps = (dispatch, props) => ({
-  onClick: () => dispatch(setFilter(props.filter))
-})
-
-const FilterLink = connect(mapStateToProps, mapDispatchToProps)(Link)
 export default FilterLink

@@ -1,24 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './assets/styles/style.scss'
+import { BrowserRouter as Router } from 'react-router-dom'
+import './style.scss'
 
 import { AppContainer } from 'react-hot-loader'
 
-import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
-
-import { todos, filter } from './reducers'
-
-const reducer = combineReducers({ todos, filter })
-const store = createStore(reducer)
+import configureStore from './store'
 
 import App from './components/App.jsx'
+
+const store = configureStore()
 
 const render = Component => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
-        <Component />
+        <Router>
+          <Component />
+        </Router>
       </Provider>
     </AppContainer>,
     document.getElementById('root')
