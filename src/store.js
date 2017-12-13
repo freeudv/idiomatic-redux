@@ -1,18 +1,14 @@
 import { createStore } from 'redux'
-import throttle from 'lodash/throttle'
-
 import rootReducer from './reducers'
-import { loadState, saveState } from './localStorage'
 
-const addLoggingToDispatch = store => {
-  const rawDispatch = store.dispatch
-  if (!console.group) return rawDispatch //if browser not support console.group
+const logger = store => next => {
+  if (!console.group) return next //if browser not support console.group
 
   return action => {
     console.group(action.type)
     console.log('%c prev state', 'color: blue', store.getState())
     console.log('%c action', 'background:white; color: tomato', action)
-    const returnValue = rawDispatch(action)
+    const returnValue = next(action)
     console.log('%c new state', 'color: green', store.getState())
     console.groupEnd(action.type)
 
@@ -20,17 +16,31 @@ const addLoggingToDispatch = store => {
   }
 }
 
-const configureStore = () => {
-  const initialState = loadState()
+const promise = store => next => action => {
+  if (typeof action.then === 'function') {
+    return action.then(next)
+  }
 
-  const store = createStore(rootReducer, initialState)
+  return next(action)
+}
+
+const wrapDispatchWithMiddlewares = (store, middlewares) => {
+  middlewares
+    .slice()
+    .reverse()
+    .forEach(middleware => (store.dispatch = middleware(store)(store.dispatch)))
+}
+
+const configureStore = () => {
+  const store = createStore(rootReducer)
+  const middlewares = [promise]
 
   if (process.env.NODE_ENV !== 'production') {
-    store.dispatch = addLoggingToDispatch(store)
+    middlewares.push(logger)
     window.store = store
   }
 
-  store.subscribe(throttle(() => saveState(store.getState()), 1000))
+  wrapDispatchWithMiddlewares(store, middlewares)
 
   return store
 }

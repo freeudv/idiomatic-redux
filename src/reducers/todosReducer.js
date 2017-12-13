@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-import { ADD_TODO, TOGGLE_TODO } from '../actions'
+import { ADD_TODO, TOGGLE_TODO, RECEIVE_TODOS } from '../constants'
 
 const todo = (state, action) => {
   switch (action.type) {

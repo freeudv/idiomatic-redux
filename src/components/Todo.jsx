@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Todo = ({ completed, title, id, toggleTodo }) => {
+const Todo = ({ completed, title, id, onTodoClick }) => {
   return (
     <li
-      onClick={() => toggleTodo(id)}
+      onClick={() => onTodoClick(id)}
       style={{ textDecoration: completed ? 'line-through' : 'none' }}
     >
       {title}
