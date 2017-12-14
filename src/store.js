@@ -1,48 +1,55 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
+import thunk from 'redux-thunk'
+//import promise from 'redux-promise'
+
 import rootReducer from './reducers'
 
-const logger = store => next => {
-  if (!console.group) return next //if browser not support console.group
+// own versions of logger and promise midlewares
+// const logger = store => next => {
+//   if (!console.group) return next //if browser not support console.group
 
-  return action => {
-    console.group(action.type)
-    console.log('%c prev state', 'color: blue', store.getState())
-    console.log('%c action', 'background:white; color: tomato', action)
-    const returnValue = next(action)
-    console.log('%c new state', 'color: green', store.getState())
-    console.groupEnd(action.type)
+//   return action => {
+//     console.group(action.type)
+//     console.log('%c prev state', 'color: blue', store.getState())
+//     console.log('%c action', 'background:white; color: tomato', action)
+//     const returnValue = next(action)
+//     console.log('%c new state', 'color: green', store.getState())
+//     console.groupEnd(action.type)
 
-    return returnValue
-  }
-}
+//     return returnValue
+//   }
+// }
 
-const promise = store => next => action => {
-  if (typeof action.then === 'function') {
-    return action.then(next)
-  }
+// const promise = store => next => action => {
+//   if (typeof action.then === 'function') {
+//     return action.then(next)
+//   }
+//   return next(action)
+// }
 
-  return next(action)
-}
+// const thunk = store => next => action =>
+//   typeof action === 'function'
+//     ? action(store.dispatch, store.getState)
+//     : next(action)
 
-const wrapDispatchWithMiddlewares = (store, middlewares) => {
-  middlewares
-    .slice()
-    .reverse()
-    .forEach(middleware => (store.dispatch = middleware(store)(store.dispatch)))
-}
+// const wrapDispatchWithMiddlewares = (store, middlewares) => {
+//   middlewares
+//     .slice()
+//     .reverse()
+//     .forEach(middleware => (store.dispatch = middleware(store)(store.dispatch)))
+// }
 
 const configureStore = () => {
-  const store = createStore(rootReducer)
-  const middlewares = [promise]
+  const middlewares = [thunk]
 
   if (process.env.NODE_ENV !== 'production') {
     middlewares.push(logger)
-    window.store = store
   }
 
-  wrapDispatchWithMiddlewares(store, middlewares)
+  //wrapDispatchWithMiddlewares(store, middlewares)
 
-  return store
+  return createStore(rootReducer, applyMiddleware(...middlewares))
 }
 
 export default configureStore

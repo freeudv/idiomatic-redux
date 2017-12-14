@@ -1,5 +1,10 @@
 import uuidv4 from 'uuid/v4'
-import { ADD_TODO, TOGGLE_TODO, RECEIVE_TODOS } from '../constants'
+import { getIsFetching } from '../reducers'
+import {
+  FETCH_TODOS_REQUEST,
+  FETCH_TODOS_SUCCESS,
+  FETCH_TODOS_FAILURE
+} from '../constants'
 import * as api from '../api'
 
 export const addTodo = title => ({
@@ -10,11 +15,33 @@ export const addTodo = title => ({
 
 export const toggleTodo = id => ({ type: TOGGLE_TODO, id })
 
-const recieveTodos = (filter, response) => ({
-  type: RECEIVE_TODOS,
-  filter,
-  response
-})
+export const fetchTodos = filter => (dispatch, getState) => {
+  // stop fetching data if always isFetching
+  if (getIsFetching(getState(), filter)) {
+    return
+    //return Promise.resolve() if we want to do something were we call action fetchTodos,
+    //for example fetchTodos(filter).then(() => console.log('async done'))
+  }
 
-export const fetchTodos = filter =>
-  api.fetchTodos(filter).then(res => recieveTodos(filter, res))
+  dispatch({
+    type: FETCH_TODOS_REQUEST,
+    filter
+  })
+
+  return api.fetchTodos(filter).then(
+    response => {
+      dispatch({
+        type: FETCH_TODOS_SUCCESS,
+        filter,
+        response
+      })
+    },
+    error => {
+      dispatch({
+        type: FETCH_TODOS_FAILURE,
+        filter,
+        message: error.message || 'Something went wrong!'
+      })
+    }
+  )
+}

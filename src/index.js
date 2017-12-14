@@ -11,6 +11,7 @@ import configureStore from './store'
 import App from './components/App.jsx'
 
 const store = configureStore()
+window.store = store
 
 const render = Component => {
   ReactDOM.render(
