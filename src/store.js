@@ -3,7 +3,7 @@ import logger from 'redux-logger'
 import thunk from 'redux-thunk'
 //import promise from 'redux-promise'
 
-import rootReducer from './reducers'
+import rootReducer from 'reducers'
 
 // own versions of logger and promise midlewares
 // const logger = store => next => {

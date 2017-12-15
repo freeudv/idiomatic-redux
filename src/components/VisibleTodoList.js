@@ -8,8 +8,7 @@ import { toggleTodo, fetchTodos } from '../actions'
 
 import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers'
 
-import TodoList from './TodoList.jsx'
-import FetchError from './FetchError.jsx'
+import { TodoList, FetchError } from 'components'
 
 class VisibleTodoList extends Component {
   componentDidMount() {

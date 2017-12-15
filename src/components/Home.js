@@ -1,8 +1,6 @@
 import React from 'react'
 
-import AddTodo from './AddTodo.jsx'
-import VisibleTodoList from './VisibleTodoList.js'
-import Footer from './Footer.jsx'
+import { AddTodo, VisibleTodoList, Footer } from 'components'
 
 const Home = () => (
   <div>

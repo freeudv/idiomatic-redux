@@ -23,6 +23,14 @@
 
   "plugins": ["react", "import"],
 
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "./webpack.config.js"
+      }
+    }
+  },
+
   "rules": {
     "no-debugger": 0,
     "no-console": 0,
@@ -31,7 +39,7 @@
     "no-use-before-define": 1,
     "no-undef": 1,
     "eol-last": 0,
-    "no-case-declarations": 0,
+    //"no-case-declarations": 0,
     "indent": [2, 2, { "SwitchCase": 1 }],
     "quotes": [2, "single", { "allowTemplateLiterals": true }],
     "no-var": 2,

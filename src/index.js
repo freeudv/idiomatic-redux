@@ -8,7 +8,7 @@ import { AppContainer } from 'react-hot-loader'
 import { Provider } from 'react-redux'
 import configureStore from './store'
 
-import App from './components/App.jsx'
+import { App } from 'components'
 
 const store = configureStore()
 window.store = store
@@ -29,7 +29,7 @@ const render = Component => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./components/App.jsx', () => {
+  module.hot.accept('./components/App', () => {
     render(App)
   })
 }

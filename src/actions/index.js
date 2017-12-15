@@ -1,5 +1,5 @@
 import { normalize } from 'normalizr'
-import { getIsFetching } from '../reducers'
+import { getIsFetching } from 'reducers'
 import {
   FETCH_TODOS_REQUEST,
   FETCH_TODOS_SUCCESS,
@@ -7,7 +7,7 @@ import {
   ADD_TODO_SUCCESS,
   TOGGLE_TODO_SUCCESS
 } from '../constants'
-import * as api from '../api'
+import * as api from 'api'
 import * as schema from './schema'
 
 export const addTodo = title => dispatch =>
