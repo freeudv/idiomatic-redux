@@ -1,20 +1,20 @@
-import v4 from 'uuid/v4'
+import v4 from "uuid/v4"
 
 const fakeDatabase = {
   todos: [
     {
       id: v4(),
-      title: 'hey',
+      title: "hey",
       completed: false
     },
     {
       id: v4(),
-      title: 'ho',
+      title: "ho",
       completed: true
     },
     {
       id: v4(),
-      title: 'let`s go',
+      title: "let`s go",
       completed: false
     }
   ]
@@ -29,11 +29,11 @@ export const fetchTodos = filter =>
     // }
 
     switch (filter) {
-      case 'all':
+      case "all":
         return fakeDatabase.todos
-      case 'active':
+      case "active":
         return fakeDatabase.todos.filter(t => !t.completed)
-      case 'completed':
+      case "completed":
         return fakeDatabase.todos.filter(t => t.completed)
       default:
         throw new Error(`Unknown filter: ${filter}`)

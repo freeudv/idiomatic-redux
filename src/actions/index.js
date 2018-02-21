@@ -1,18 +1,18 @@
-import { normalize } from 'normalizr'
-import { getIsFetching } from 'reducers'
+import { normalize } from "normalizr"
+import { getIsFetching } from "reducers"
 import {
   FETCH_TODOS_REQUEST,
   FETCH_TODOS_SUCCESS,
   FETCH_TODOS_FAILURE,
   ADD_TODO_SUCCESS,
   TOGGLE_TODO_SUCCESS
-} from '../constants'
-import * as api from 'api'
-import * as schema from './schema'
+} from "../constants"
+import * as api from "api"
+import * as schema from "./schema"
 
 export const addTodo = title => dispatch =>
   api.addTodo(title).then(response => {
-    console.log('normalized response', normalize(response, schema.todo))
+    console.log("normalized response", normalize(response, schema.todo))
     dispatch({
       type: ADD_TODO_SUCCESS,
       response: normalize(response, schema.todo)
@@ -43,7 +43,7 @@ export const fetchTodos = filter => (dispatch, getState) => {
   return api.fetchTodos(filter).then(
     response => {
       console.log(
-        'normalized response',
+        "normalized response",
         normalize(response, schema.arrayOfTodos)
       )
 
@@ -57,7 +57,7 @@ export const fetchTodos = filter => (dispatch, getState) => {
       dispatch({
         type: FETCH_TODOS_FAILURE,
         filter,
-        message: error.message || 'Something went wrong!'
+        message: error.message || "Something went wrong!"
       })
     }
   )

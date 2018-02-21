@@ -1,7 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { addTodo } from 'actions'
+import React from "react"
+import { connect } from "react-redux"
+//import { bindActionCreators } from "redux"
+import { addTodo } from "actions"
 
 const AddTodo = ({ addNewTodo }) => {
   let textInput = null
@@ -10,7 +10,7 @@ const AddTodo = ({ addNewTodo }) => {
     if (textInput.value) {
       addNewTodo(textInput.value)
     }
-    textInput.value = ''
+    textInput.value = ""
   }
 
   return (
@@ -26,8 +26,12 @@ const AddTodo = ({ addNewTodo }) => {
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  addNewTodo: bindActionCreators(addTodo, dispatch)
-})
+// const mapDispatchToProps = dispatch => ({
+//   addNewTodo: bindActionCreators(addTodo, dispatch)
+// })
+
+const mapDispatchToProps = {
+  addNewTodo: addTodo
+}
 
 export default connect(null, mapDispatchToProps)(AddTodo)

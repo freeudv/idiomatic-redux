@@ -1,12 +1,12 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from "redux"
 
-import byId, * as fromById from './byIds'
-import createList, * as fromList from './createList'
+import byId, * as fromById from "./byIds"
+import createList, * as fromList from "./createList"
 
 const ListByFilter = combineReducers({
-  all: createList('all'),
-  active: createList('active'),
-  completed: createList('completed')
+  all: createList("all"),
+  active: createList("active"),
+  completed: createList("completed")
 })
 
 const todos = combineReducers({ byId, ListByFilter })

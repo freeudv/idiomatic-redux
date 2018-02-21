@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import PropTypes from 'prop-types'
+import React, { Component } from "react"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
+import PropTypes from "prop-types"
 
-import { toggleTodo, fetchTodos } from '../actions'
+import { toggleTodo, fetchTodos } from "../actions"
 //or import * as action from '../actions'
 
-import { getVisibleTodos, getIsFetching, getErrorMessage } from '../reducers'
+import { getVisibleTodos, getIsFetching, getErrorMessage } from "../reducers"
 
-import { TodoList, FetchError } from 'components'
+import { TodoList, FetchError } from "components"
 
 class VisibleTodoList extends Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ class VisibleTodoList extends Component {
 
   fetchData() {
     const { filter, fetchTodos } = this.props
-    fetchTodos(filter).then(() => console.log('async done'))
+    fetchTodos(filter).then(() => console.log("async done"))
   }
 
   render() {
@@ -43,7 +43,7 @@ class VisibleTodoList extends Component {
 }
 
 VisibleTodoList.propTypes = {
-  filter: PropTypes.oneOf(['all', 'active', 'completed']).isRequired,
+  filter: PropTypes.oneOf(["all", "active", "completed"]).isRequired,
   todos: PropTypes.array.isRequired,
   isFetching: PropTypes.bool.isRequired,
   fetchTodos: PropTypes.func.isRequired,
@@ -51,7 +51,7 @@ VisibleTodoList.propTypes = {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const filter = ownProps.match.params.filter || 'all'
+  const filter = ownProps.match.params.filter || "all"
 
   return {
     todos: getVisibleTodos(state, filter),
