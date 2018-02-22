@@ -1,18 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './assets/styles/style.scss'
+import React from "react"
+import ReactDOM from "react-dom"
+import "./assets/styles/style.css"
 
-import { AppContainer } from 'react-hot-loader'
+import { AppContainer } from "react-hot-loader"
 
-import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
+import { createStore, combineReducers } from "redux"
+import { Provider } from "react-redux"
 
-import { todos, filter } from './reducers'
+import { todos, filter } from "./reducers"
 
 const reducer = combineReducers({ todos, filter })
 const store = createStore(reducer)
 
-import App from './components/App.jsx'
+import App from "./components/App.js"
 
 const render = Component => {
   ReactDOM.render(
@@ -21,14 +21,14 @@ const render = Component => {
         <Component />
       </Provider>
     </AppContainer>,
-    document.getElementById('root')
+    document.getElementById("root")
   )
 }
 
 render(App)
 
 if (module.hot) {
-  module.hot.accept('./components/App.jsx', () => {
+  module.hot.accept("./components/App", () => {
     render(App)
   })
 }

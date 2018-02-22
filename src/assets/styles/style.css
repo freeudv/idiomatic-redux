@@ -1,0 +1,8 @@
+li {
+  list-style: circle;
+  cursor: pointer;
+}
+
+.completed {
+  text-decoration: line-through;
+}
