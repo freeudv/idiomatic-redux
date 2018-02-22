@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO, SET_FILTER } from "../actions"
+import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER } from "../actions"
 
 let nextId = 0
 
@@ -29,6 +29,9 @@ export const todos = (state = [], action) => {
     case TOGGLE_TODO:
       return state.map(t => todo(t, action))
 
+    case DELETE_TODO:
+      return state.filter(t => t.id !== action.id)
+
     default:
       return state
   }
@@ -44,7 +47,7 @@ export const filter = (state = "ALL", action) => {
   }
 }
 
-export const getFilter = (todos, filter) => {
+export const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case "ALL":
       return todos

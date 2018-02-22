@@ -3,12 +3,12 @@ import { setFilter } from "../actions"
 
 import Link from "./Link.jsx"
 
-const mapStateToProps = (state, props) => ({
-  active: props.filter === state.filter
+const mapStateToProps = (state, ownProps) => ({
+  active: ownProps.filter === state.filter
 })
 
-const mapDispatchToProps = (dispatch, props) => ({
-  onClick: () => dispatch(setFilter(props.filter))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onClick: () => dispatch(setFilter(ownProps.filter))
 })
 
 const FilterLink = connect(mapStateToProps, mapDispatchToProps)(Link)
