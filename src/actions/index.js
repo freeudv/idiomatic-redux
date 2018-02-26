@@ -21,6 +21,7 @@ export const addTodo = title => dispatch =>
 
 export const toggleTodo = id => dispatch =>
   api.toggleTodo(id).then(response => {
+    console.log("normalized response", normalize(response, schema.todo))
     dispatch({
       type: TOGGLE_TODO_SUCCESS,
       response: normalize(response, schema.todo)
