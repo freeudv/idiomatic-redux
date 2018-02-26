@@ -2,7 +2,7 @@ import { ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_FILTER } from "../actions"
 
 let nextId = 0
 
-const todo = (state, action) => {
+export const todo = (state, action) => {
   switch (action.type) {
     case ADD_TODO:
       return {
